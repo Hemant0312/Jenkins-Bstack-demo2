@@ -78,15 +78,16 @@ class mainTestClass {
 	public void executeTest(Hashtable<String, String> capsHashtable) {
 		String key;
 		DesiredCapabilities caps = new DesiredCapabilities();
+		caps.setCapability("build", buildName); // CI/CD job name using BROWSERSTACK_BUILD_NAME env variable
+       		caps.setCapability("browserstack.local", browserstackLocal);
+       		caps.setCapability("browserstack.localIdentifier", browserstackLocalIdentifier);
 		// Iterate over the hashtable and set the capabilities
 		Set<String> keys = capsHashtable.keySet();
 		Iterator<String> itr = keys.iterator();
 		while (itr.hasNext()) {
        		key = itr.next();
        		caps.setCapability(key, capsHashtable.get(key));
-       		caps.setCapability("build", buildName); // CI/CD job name using BROWSERSTACK_BUILD_NAME env variable
-       		caps.setCapability("browserstack.local", browserstackLocal);
-       		caps.setCapability("browserstack.localIdentifier", browserstackLocalIdentifier);
+       		
     	}
     	WebDriver driver;
 		try {
